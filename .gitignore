@@ -1,0 +1,7 @@
+# Compiled binary
+/postghost
+
+# Editor / OS cruft
+.DS_Store
+.idea/
+.vscode/

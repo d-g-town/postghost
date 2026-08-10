@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>postghost</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>postghost <span aria-hidden="true">👻</span></h1>
+      <p class="tagline">Leave a message. It haunts a Postgres table.</p>
+    </header>
+
+    <form class="composer" method="post" action="/posts">
+      <input type="text" name="author" placeholder="your name" maxlength="40" autocomplete="off">
+      <textarea name="body" rows="3" placeholder="say something…" maxlength="500" required></textarea>
+      <button type="submit">Post</button>
+    </form>
+
+    <section class="posts">
+      {{- if . }}
+        {{- range . }}
+        <article class="post">
+          <div class="meta">
+            <strong>{{ .Author }}</strong>
+            <time datetime="{{ .CreatedAt.Format "2006-01-02T15:04:05Z07:00" }}">
+              {{ .CreatedAt.Format "Jan 2, 2006 at 3:04pm" }}
+            </time>
+          </div>
+          <p class="body">{{ .Body }}</p>
+          <form method="post" action="/posts/{{ .ID }}/delete">
+            <button type="submit" class="delete" aria-label="Delete post">Delete</button>
+          </form>
+        </article>
+        {{- end }}
+      {{- else }}
+        <p class="empty">Nothing here yet. Be the first ghost.</p>
+      {{- end }}
+    </section>
+  </main>
+</body>
+</html>
