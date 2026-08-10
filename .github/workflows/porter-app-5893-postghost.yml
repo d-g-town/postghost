@@ -25,3 +25,4 @@ jobs:
                 PORTER_PROJECT: "19436"
                 PORTER_TAG: ${{ steps.vars.outputs.sha_short }}
                 PORTER_TOKEN: ${{ secrets.PORTER_APP_19436_18306 }}
+                DOCKER_BUILDKIT: '1'
